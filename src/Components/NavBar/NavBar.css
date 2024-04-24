@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins;
+}
+.navbar{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    background: #F2F2F2;
+    padding: 15px 7%;
+
+}
+.logo{
+    width: 80px;
+}
+.icon{
+    width: 20px;
+    cursor: pointer;
+}
+.account-button {
+    background-color: #1BBC9B; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+li{
+    list-style: none;
+    display: inline-block;
+    margin: 0px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    color:#1BBC9B;
+}
+ul{
+    flex: 1;
+    list-style: none;
+    text-align: center;
+}
+ul li{
+    display: inline-block;
+    margin: 0px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    color:black;
+}
