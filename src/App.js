@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
+
 import efficientRouteImage from './images/grocery_store.jpeg';
 import houseIcon from './images/house_icon.png';
 import AuchanImage from './images/auchan.jpg';
 import EggsImage from './images/eggs.jpg';
+import milkImage from './images/milk.jpg';
+import tomatoesImage from './images/tomatoes.jpg';
+import syrupImage from './images/syrup.jpg';
+import kauflandImage from './images/kaufland.jpg';
+import butterImage from './images/butter.jpg';
+import onionImage from './images/onion.jpg';
+import fishImage from './images/fish.jpg';
+import beefImage from './images/beef.jpg';
+import riceImage from './images/rice.jpg';
 import ReactDOM from 'react-dom';
 
 function App() {
@@ -217,14 +227,16 @@ function App() {
             <div className="mymap" id={mapId}></div>
             <div className="store-container">
                 <div className="store-card">
-                    <img src={AuchanImage} alt="Auchan Store" />
-                    <h2>Auchan</h2>
-                    <p> nr. 5C, Palas Mall, Strada Palas, Iași 700051</p>
-                    <p>Price: 79.99 RON</p>
+                    <div className="store-card-info">
+                        <img src={AuchanImage} alt="Auchan Store" />
+                        <h2>Auchan</h2>
+                        <p> nr. 5C, Palas Mall, Strada Palas, Iași 700051</p>
+                        <p>Price: 79.99 RON</p>
+                    </div>
                     <div className="details-button-container">
                         <button className="details-button" onClick={() => showDetails(
                             'Auchan',
-                            [EggsImage, './images/milk.jpg', './images/tomatoes.jpg', './images/syrup.jpg'],
+                            [EggsImage, milkImage, tomatoesImage, syrupImage],
                             ['Eggs x2', 'Milk 2L', 'Tomatoes 1kg', 'Forest fruit syrup 1L'],
                             ['4.20 RON', '10.99 RON', '34.70 RON', '30.10 RON'],
                             '79.99 RON'
@@ -234,13 +246,15 @@ function App() {
                     </div>
                 </div>
                 <div className="store-card">
-                    <img src="kaufland.jpg" alt="Kaufland Store" />
-                    <h2>Kaufland</h2>
-                    <p>Iasi-Alexandru cel Bun</p>
-                    <p>Price: 122.91 RON</p>
+                    <div className="store-card-info">
+                        <img src={kauflandImage} alt="Kaufland Store" />
+                        <h2>Kaufland</h2>
+                        <p>Iasi-Alexandru cel Bun</p>
+                        <p>Price: 122.91 RON</p>
+                    </div>
                     <div className="details-button-container">
                         <button className="details-button" onClick={() => showDetails('Kaufland', 
-                        ['butter.jpg', 'onion.jpg', 'fish.jpg', 'beef.jpg', 'rice.jpg'], 
+                        [butterImage, onionImage, fishImage, beefImage, riceImage], 
                         ['Butter x2', 'Onion x3', 'Fish 1kg', 'Beef 1kg', 'Rice 2kg'],
                         ['8.99 RON', '10.45 RON', '33.49 RON','49.99 RON','19.99 RON' ],
                         '122.91 RON')}>
