@@ -221,3 +221,27 @@ cursor: pointer;
 .details-button-container {
   text-align: center; /* Aliniere butoane în centru */
 }
+
+.map-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  
+}
+
+.map-controls button {
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+}
+
+.map-controls button:hover {
+  background-color: #f0f0f0;
+}

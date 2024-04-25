@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import NavBar from './Components/NavBar/NavBar';
 import efficientRouteImage from './images/grocery_store.jpeg';
 import houseIcon from './images/house_icon.png';
@@ -16,6 +18,51 @@ function App() {
     var HOME = [27.577771, 47.153566];
     var mapId = 'mymap';
     var [markers, setMarkers] = useState([]);
+
+    //zoom in zoom out
+    useEffect(() => {
+        if (map) {
+            /*event listener pt zoom in */
+            document.getElementById('zoomInBtn').addEventListener('click', handleZoomIn);
+            /*event listener pt zoom out */
+            document.getElementById('zoomOutBtn').addEventListener('click', handleZoomOut);
+        }
+    }, [map]);
+
+    useEffect(() => {
+        if (window.tt && window.tt.map) {
+            const mapInstance = window.tt.map({
+                key: APIKEY,
+                container: mapId,
+                center: HOME,
+                zoom: 15,
+                style: 'tomtom://vector/1/basic-main',
+            });
+            setMap(mapInstance);
+            const iconElement = document.createElement('div');
+            const imgElement = document.createElement('img');
+            imgElement.src = houseIcon;
+            imgElement.style.width = '45px';
+            imgElement.style.height = '45px';
+            iconElement.appendChild(imgElement);
+
+            const marker = new window.tt.Marker({ element: iconElement }).setLngLat(HOME).addTo(mapInstance);
+        }
+    }, []);
+
+    const handleZoomIn = () => {
+        if (map) {
+            const currentZoom = map.getZoom();
+            map.setZoom(currentZoom + 1);
+        }
+    };
+
+    const handleZoomOut = () => {
+        if (map) {
+            const currentZoom = map.getZoom();
+            map.setZoom(currentZoom - 1);
+        }
+    };
 
     useEffect(() => {
         const waypointsDropdown = document.getElementById('waypointsDropdown');
@@ -214,7 +261,13 @@ function App() {
                     </select>
                 </div>
             </div>
-            <div className="mymap" id={mapId}></div>
+            <div className="mymap" id={mapId}>
+                <div className="map-controls">
+                <button id="zoomInBtn"><FontAwesomeIcon icon={faPlus} /></button>
+                <button id="zoomOutBtn"><FontAwesomeIcon icon={faMinus} /></button>
+            </div>
+            </div>
+            
             <div className="store-container">
                 <div className="store-card">
                     <img src={AuchanImage} alt="Auchan Store" />
