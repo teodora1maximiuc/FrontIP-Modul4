@@ -248,6 +248,32 @@ function App() {
         const modal = document.getElementById('detailsModal');
         modal.style.display = 'none';
     };
+    const fetchData = () => {
+        fetch('http://localhost:8080/api/endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ /* Data to be sent */ })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Handle the response data here
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    };
+
+    // Call fetchData function when component mounts or whenever necessary
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <div className="container">
