@@ -92,7 +92,7 @@
   margin-top: 100px;
   width: 80%; 
   height: 90vh;
-  margin: 10% auto;
+  margin: 10% auto 5% auto;
 }
 body {
   margin: 0;
@@ -101,32 +101,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Stil pentru containerul de jos */
-.bottom-container {
-  display: flex;
-  justify-content: center; /* Aliniază orizontal elementele în centru */
-  align-items: center; /* Aliniază vertical elementele în centru */
-  margin-top: 20px; /* Spațiul de sus */
-  margin-right: 100px;
-}
 
-/* Stil pentru textul adițional */
-.bottom-container p {
-  margin-left: 10px; /* Spațiul între buton și text */
-  align-items: center;
-}
 
-.details-button {
-  background-color: #007bff; /* Culoare de fundal albastru */
-  color: #fff; /* Culoare text alb */
-  padding: 8px 16px; /* Spatiere interioara */
-  border: none; /* Fara contur */
-  border-radius: 4px; /* Rotunjire margini */
-  cursor: pointer; /* Pointer la hover */
-  font-size: 16px; /* Dimensiune font */
-  margin-top: 50px; /* Spațiul de sus */
-  margin-top: 50px;
-}
 .back-button {
   background-color: #007bff; /* Culoare de fundal albastru */
   color: #fff; /* Culoare text alb */
@@ -150,37 +126,85 @@ body {
 }
 
 .store-container {
-  margin-top: -78px;
-  padding-left: 6%;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box; 
+  
 }
 
 .store-card {
   border: 1px solid #ccc;
-  padding: 16px;
-  margin: 16px;
-  max-width: 25%;
-  min-width: 200px;
+  padding: 16px 16px;
+  margin: 0% 2%;
+  width: 250px; /* Ajustează dimensiunea cardurilor pentru ecrane mici */
+  margin-bottom: 20px;
+justify-content: left;
+ 
+  
+}
+.store-card-info{
+  height: 150px;
+  justify-content: center;
+  
+}
+.locatie{
+  height: 15px;
+  width: 15px;
+  float: left;
+
+}
+.p1{
+  margin-left: 20px;
+}
+.locatie img{
+  height: auto;
+  width: 100%;
+
+  
+}
+.price{
+  padding-top: 3%;
 }
 
-.store-card-info {
+
+.img-card{
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 10px 10px;
+  width: 100%;
+}
+.store-card-img {
+  text-align: center;
   display: flex;
-  flex-direction: column;
-  position: relative;
-  height: 300px; /* Fixed height for the image container */
+  justify-content: center;
+  box-sizing: border-box; 
+  height: 120px;
+  width: auto;
+  
 }
-
-.store-card-info img {
-  width: 100%; /* Ensure the image fills the width of its container */
-  height: 100%; /* Fill the entire height of the container */
-  object-fit: cover; /* Cover the container with the image */
-  overflow: hidden; /* Hide any overflow beyond the container */
+.store-card-img img{
+  width: 100%;
+  height: auto;
 }
 
 .details-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   text-align: center;
-  margin-top: auto; /* Push the button to the bottom */
+  
+  
+ /* margin-top: auto; /* Push the button to the bottom */
+}/* Stil pentru textul adițional */
+
+.bottom-container {
+  display: flex;
+  margin-left: 10px; /* Spațiul între buton și text */
+  align-items: center;
+  justify-content: center;
 }
+
 
 /* Details button */
 .details-button {
@@ -191,7 +215,8 @@ body {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 50px;
+  display: flex;
+  align-items: flex-end;
   /* Add any additional styling for the button */
 }
 
@@ -220,7 +245,11 @@ padding: 20px;
 border: 1px solid #888;
 width: 80%;
 }
-
+.titlu{
+  text-align: center;
+  padding-bottom: 25px;
+  text-decoration: underline;
+}
 .close {
 color: #aaa;
 float: right;
@@ -234,19 +263,31 @@ color: black;
 text-decoration: none;
 cursor: pointer;
 }
-
 .image-gallery {
-  display: grid;
-  width: 100%; 
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px; 
+  display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: center;
 }
+.image-gallery p{
+  margin-left: 20px;
+
+}
+
 
 .image-gallery img {
-  width: 250px;
-  height: 250px; 
-  object-fit: cover; 
+  width: 250px; /* Asigură că imaginea ocupă întreaga lățime a containerului */
+  height: 250px; /* Permite imaginii să-și mențină proporțiile */
+  max-height: 250px; /* Limitează înălțimea maximă a imaginii pentru a se încadra în spațiul dedicat */
+  object-fit: cover; /* Ajustează modul în care imaginea este poziționată în container */
+  border-radius: 30px;
+  display: flex;
+  box-sizing: border-box; 
+  margin: 10px 10px;
+  
 }
+
+
 
 .text-gallery p {
   margin-bottom: 20px; 

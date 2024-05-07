@@ -2,21 +2,46 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import NavBar from './Components/NavBar/NavBar';
+import NavBar from '../../reactjs/src/Components/NavBar/NavBar';
 
-import efficientRouteImage from './images/grocery_store.jpeg';
-import houseIcon from './images/house_icon.png';
-import AuchanImage from './images/auchan.jpg';
-import EggsImage from './images/eggs.jpg';
-import milkImage from './images/milk.jpg';
-import tomatoesImage from './images/tomatoes.jpg';
-import syrupImage from './images/syrup.jpg';
-import kauflandImage from './images/kaufland.jpg';
-import butterImage from './images/butter.jpg';
-import onionImage from './images/onion.jpg';
-import fishImage from './images/fish.jpg';
-import beefImage from './images/beef.jpg';
-import riceImage from './images/rice.jpg';
+import efficientRouteImage from '../../reactjs/src/images/grocery_store.jpeg';
+import houseIcon from '../../reactjs/src/images/house_icon.png';
+import icon from '../../reactjs/src/images/icon.png';
+import AuchanImage from '../../reactjs/src/images/auchan.jpg';
+import EggsImage from '../../reactjs/src/images/eggs.jpg';
+import milkImage from '../../reactjs/src/images/milk.jpg';
+import tomatoesImage from '../../reactjs/src/images/tomatoes.jpg';
+import syrupImage from '../../reactjs/src/images/syrup.jpg';
+import kauflandImage from '../../reactjs/src/images/kaufland.jpg';
+import butterImage from '../../reactjs/src/images/butter.jpg';
+import onionImage from '../../reactjs/src/images/onion.jpg';
+import fishImage from '../../reactjs/src/images/fish.jpg';
+import beefImage from '../../reactjs/src/images/beef.jpg';
+import DedemanImage from '../../reactjs/src/images/dedeman.jpg';
+import broomImage from '../../reactjs/src/images/broom.jpg';
+import gloveImage from '../../reactjs/src/images/glove.jpg';
+import glueImage from '../../reactjs/src/images/glue.jpg';
+import LidlImage from '../../reactjs/src/images/lidl.jpg';
+import cheeseImage from '../../reactjs/src/images/cheese.jpg';
+import potatoImage from '../../reactjs/src/images/potato.jpg';
+import carrotImage from '../../reactjs/src/images/carrot.jpg';
+import yogurtImage from '../../reactjs/src/images/yogurt.jpg';
+import PennyImage from '../../reactjs/src/images/penny.jpg';
+import celeryImage from '../../reactjs/src/images/celery.jpg';
+import cucumberImage from '../../reactjs/src/images/cucumber.jpg';
+import breadImage from '../../reactjs/src/images/bread.jpg';
+import lemonImage from '../../reactjs/src/images/lemon.jpg';
+import MegaImage from '../../reactjs/src/images/mega.jpg';
+import cherryImage from '../../reactjs/src/images/cherry.jpg';
+import pastaImage from '../../reactjs/src/images/pasta.jpg';
+import chickenImage from '../../reactjs/src/images/chicken.jpg';
+import garlicImage from '../../reactjs/src/images/garlic.jpg';
+import ProfiImage from '../../reactjs/src/images/profi.jpg';
+import spinachImage from '../../reactjs/src/images/spinach.jpg';
+import pumpkinImage from '../../reactjs/src/images/pumpkin.jpg';
+import peaImage from '../../reactjs/src/images/pea.jpg';
+import broccoliImage from '../../reactjs/src/images/broccoli.jpg';
+import riceImage from '../../reactjs/src/images/rice.jpg';
 import ReactDOM from 'react-dom';
 
 function App() {
@@ -303,40 +328,141 @@ function App() {
                 <button id="zoomOutBtn"><FontAwesomeIcon icon={faMinus} /></button>
             </div>
             </div>
-            
+            <div className='titlu'>
+                <h2> Store route order:  </h2>
+            </div>
             <div className="store-container">
                 <div className="store-card">
+                <div className='store-card-img'> <img src={AuchanImage} alt="Auchan Store" /> </div>
                     <div className="store-card-info">
-                        <img src={AuchanImage} alt="Auchan Store" />
                         <h2>Auchan</h2>
-                        <p> nr. 5C, Palas Mall, Strada Palas, Iași 700051</p>
-                        <p>Price: 79.99 RON</p>
+                        <div className='locatie'><img src={icon}/></div>
+                        <p className='p1'>nr. 5C, Palas Mall, Strada Palas, Iași 700051</p>
+                        <hr></hr>
+                        <p className='price'>Price: <b>79.99 RON</b></p>
                     </div>
                     <div className="details-button-container">
                         <button className="details-button" onClick={() => showDetails(
                             'Auchan',
                             [EggsImage, milkImage, tomatoesImage, syrupImage],
                             ['Eggs x2', 'Milk 2L', 'Tomatoes 1kg', 'Forest fruit syrup 1L'],
-                            ['4.20 RON', '10.99 RON', '34.70 RON', '30.10 RON'],
+                            [<b>4.20 RON</b>, <b>10.99 RON</b>, <b>34.70 RON</b>, <b>30.10 RON</b>],
                             '79.99 RON'
                         )}>
                             Details
                         </button>
                     </div>
                 </div>
-                <div className="store-card">
+               <div className="store-card">
+               <div className='store-card-img'><img src={kauflandImage} alt="Kaufland Store" /></div>
                     <div className="store-card-info">
-                        <img src={kauflandImage} alt="Kaufland Store" />
                         <h2>Kaufland</h2>
-                        <p>Iasi-Alexandru cel Bun</p>
-                        <p>Price: 122.91 RON</p>
+                        <div className='locatie'><img src={icon}/></div>
+                        <p className='p1'>Iasi-Alexandru cel Bun</p>
+                        <hr></hr>
+                        <p className='price'>Price: <b>122.91 RON</b></p>
                     </div>
                     <div className="details-button-container">
                         <button className="details-button" onClick={() => showDetails('Kaufland', 
                         [butterImage, onionImage, fishImage, beefImage, riceImage], 
                         ['Butter x2', 'Onion x3', 'Fish 1kg', 'Beef 1kg', 'Rice 2kg'],
-                        ['8.99 RON', '10.45 RON', '33.49 RON','49.99 RON','19.99 RON' ],
+                        [<b>8.99 RON</b>, <b>10.45 RON</b>,<b>33.49 RON</b>,<b>49.99 RON</b>,<b>19.99 RON</b> ],
                         '122.91 RON')}>
+                            Details
+                        </button>
+                    </div>
+                </div>
+                <div className="store-card">
+                 <div className='store-card-img'> <img src={DedemanImage} alt="Dedeman Store" /> </div>
+                    <div className="store-card-info">
+                        <h2>Dedeman</h2>
+                        <div className='locatie'><img src={icon}/></div>
+                        <p className='p1'>Bulevardul Primăverii nr. 2, Iași 700264</p>
+                        <hr></hr>
+                        <p className='price'>Price: <b>29.47 RON</b></p>
+                    </div>
+                    <div className="details-button-container">
+                        <button className="details-button" onClick={() => showDetails('Dedeman', 
+                        [broomImage, gloveImage, glueImage], 
+                        ['Broom x1', 'Glove x1', 'Glue X1'],
+                        [<b>14.99 RON</b>,<b>9.49 RON</b>,<b>4.99 RON</b> ],
+                        '29.47 RON')}>
+                            Details
+                        </button>
+                    </div>
+                </div>
+                 <div className="store-card">
+                 <div className='store-card-img'> <img src={LidlImage} alt="Lidl Store" /> </div>
+                    <div className="store-card-info">
+                        <h2>Lidl</h2>
+                        <div className='locatie'><img src={icon}/></div>
+                        <p className='p1'>Strada Pantelimon Halipa 3C, Iași 700612</p>
+                        <hr></hr>
+                        <p className='price'>Price: <b>153.92 RON</b></p>
+                    </div>
+                    <div className="details-button-container">
+                        <button className="details-button" onClick={() => showDetails('Lidl', 
+                        [cheeseImage, potatoImage, carrotImage, yogurtImage], 
+                        ['Cheese 1kg', 'Potato 2kg', 'Carrot 2kg', 'Yogurt 1kg'],
+                        [<b>29.99 RON</b>, <b>59.99 RON</b>, <b>39.49 RON</b>,<b>24.45 RON</b>],
+                        '153.92 RON')}>
+                            Details
+                        </button>
+                    </div>
+                </div>
+                <div className="store-card">
+                <div className='store-card-img'> <img src={PennyImage} alt="Penny Store" /> </div>
+                    <div className="store-card-info">
+                        <h2>Penny</h2>
+                        <div className='locatie'><img src={icon}/></div>
+                        <p className='p1'> Strada Pantelimon Halipa 12A, Iași 700614</p>
+                        <hr></hr>
+                        <p className='price'>Price: <b>63.26 RON</b></p>
+                    </div>
+                    <div className="details-button-container">
+                        <button className="details-button" onClick={() => showDetails('Penny', 
+                        [celeryImage, cucumberImage, breadImage, lemonImage], 
+                        ['Celery 1kg', 'Cucumber x3', 'Bread x1', 'Lemon 1kg'],
+                        [<b>23.99 RON</b>, <b>14.49 RON</b>, <b>7.49 RON</b>,<b>17.29 RON</b> ],
+                        '63.26 RON')}>
+                            Details
+                        </button>
+                    </div>
+                </div>
+                <div className="store-card">
+                <div className='store-card-img'> <img src={MegaImage} alt="Mega Store" /> </div>
+                    <div className="store-card-info">
+                        <h2>Mega</h2>
+                        <div className='locatie'><img src={icon}/></div>
+                        <p className='p1'>Strada Cerna 1, Iași</p>
+                        <hr></hr>
+                        <p className='price'>Price:<b> 254.78 RON</b></p>
+                    </div>
+                    <div className="details-button-container">
+                        <button className="details-button" onClick={() => showDetails('Mega', 
+                        [cherryImage, pastaImage, chickenImage, garlicImage], 
+                        ['Cherry 2kg', 'Pasta 1kg', 'Chicken 3kg', 'Garlic x5'],
+                        [<b>79.99 RON</b>, <b>22.31 RON</b>, <b>119.99 RON</b>,<b>32.49 RON</b> ],
+                        '254.78 RON')}>
+                            Details
+                        </button>
+                    </div>
+                </div>
+                <div className="store-card">
+                <div className='store-card-img'> <img src={ProfiImage} alt="Profi Store" /> </div>
+                    <div className="store-card-info">
+                        <h2>Profi</h2>
+                        <div className='locatie'><img src={icon}/></div>
+                        <p className='p1'>Bulevardul Nicolae Iorga nr. 236, Iași 700721</p>
+                        <hr></hr>
+                        <p className='price'>Price: <b>178.46 RON</b></p>
+                    </div>
+                    <div className="details-button-container">
+                        <button className="details-button" onClick={() => showDetails('Profi', 
+                        [spinachImage, pumpkinImage, peaImage, broccoliImage], 
+                        ['Spinach 1kg', 'Pumpkin x2', 'Pea 1kg', 'Broccoli 1kg'],
+                        [<b>49.99 RON</b>, <b>65.49 RON</b>, <b>35.99 RON</b>,<b>26.99 RON</b> ],
+                        '178.46 RON')}>
                             Details
                         </button>
                     </div>
