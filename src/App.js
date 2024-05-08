@@ -2,67 +2,81 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import NavBar from '../../reactjs/src/Components/NavBar/NavBar';
+import NavBar from './Components/NavBar/NavBar';
 
-import efficientRouteImage from '../../reactjs/src/images/grocery_store.jpeg';
-import houseIcon from '../../reactjs/src/images/house_icon.png';
-import icon from '../../reactjs/src/images/icon.png';
-import AuchanImage from '../../reactjs/src/images/auchan.jpg';
-import EggsImage from '../../reactjs/src/images/eggs.jpg';
-import milkImage from '../../reactjs/src/images/milk.jpg';
-import tomatoesImage from '../../reactjs/src/images/tomatoes.jpg';
-import syrupImage from '../../reactjs/src/images/syrup.jpg';
-import kauflandImage from '../../reactjs/src/images/kaufland.jpg';
-import butterImage from '../../reactjs/src/images/butter.jpg';
-import onionImage from '../../reactjs/src/images/onion.jpg';
-import fishImage from '../../reactjs/src/images/fish.jpg';
-import beefImage from '../../reactjs/src/images/beef.jpg';
-import DedemanImage from '../../reactjs/src/images/dedeman.jpg';
-import broomImage from '../../reactjs/src/images/broom.jpg';
-import gloveImage from '../../reactjs/src/images/glove.jpg';
-import glueImage from '../../reactjs/src/images/glue.jpg';
-import LidlImage from '../../reactjs/src/images/lidl.jpg';
-import cheeseImage from '../../reactjs/src/images/cheese.jpg';
-import potatoImage from '../../reactjs/src/images/potato.jpg';
-import carrotImage from '../../reactjs/src/images/carrot.jpg';
-import yogurtImage from '../../reactjs/src/images/yogurt.jpg';
-import PennyImage from '../../reactjs/src/images/penny.jpg';
-import celeryImage from '../../reactjs/src/images/celery.jpg';
-import cucumberImage from '../../reactjs/src/images/cucumber.jpg';
-import breadImage from '../../reactjs/src/images/bread.jpg';
-import lemonImage from '../../reactjs/src/images/lemon.jpg';
-import MegaImage from '../../reactjs/src/images/mega.jpg';
-import cherryImage from '../../reactjs/src/images/cherry.jpg';
-import pastaImage from '../../reactjs/src/images/pasta.jpg';
-import chickenImage from '../../reactjs/src/images/chicken.jpg';
-import garlicImage from '../../reactjs/src/images/garlic.jpg';
-import ProfiImage from '../../reactjs/src/images/profi.jpg';
-import spinachImage from '../../reactjs/src/images/spinach.jpg';
-import pumpkinImage from '../../reactjs/src/images/pumpkin.jpg';
-import peaImage from '../../reactjs/src/images/pea.jpg';
-import broccoliImage from '../../reactjs/src/images/broccoli.jpg';
-import riceImage from '../../reactjs/src/images/rice.jpg';
+import efficientRouteImage from './images/grocery_store.jpeg';
+import houseIcon from './images/house_icon.png';
+import icon from './images/icon.png';
+import AuchanImage from './images/auchan.jpg';
+import EggsImage from './images/eggs.jpg';
+import milkImage from './images/milk.jpg';
+import tomatoesImage from './images/tomatoes.jpg';
+import syrupImage from './images/syrup.jpg';
+import kauflandImage from './images/kaufland.jpg';
+import butterImage from './images/butter.jpg';
+import onionImage from './images/onion.jpg';
+import fishImage from './images/fish.jpg';
+import beefImage from './images/beef.jpg';
+import DedemanImage from './images/dedeman.jpg';
+import broomImage from './images/broom.jpg';
+import gloveImage from './images/glove.jpg';
+import glueImage from './images/glue.jpg';
+import LidlImage from './images/lidl.jpg';
+import cheeseImage from './images/cheese.jpg';
+import potatoImage from './images/potato.jpg';
+import carrotImage from './images/carrot.jpg';
+import yogurtImage from './images/yogurt.jpg';
+import PennyImage from './images/penny.jpg';
+import celeryImage from './images/celery.jpg';
+import cucumberImage from './images/cucumber.jpg';
+import breadImage from './images/bread.jpg';
+import lemonImage from './images/lemon.jpg';
+import MegaImage from './images/mega.jpg';
+import cherryImage from './images/cherry.jpg';
+import pastaImage from './images/pasta.jpg';
+import chickenImage from './images/chicken.jpg';
+import garlicImage from './images/garlic.jpg';
+import ProfiImage from './images/profi.jpg';
+import spinachImage from './images/spinach.jpg';
+import pumpkinImage from './images/pumpkin.jpg';
+import peaImage from './images/pea.jpg';
+import broccoliImage from './images/broccoli.jpg';
+import riceImage from './images/rice.jpg';
 import ReactDOM from 'react-dom';
 
 function App() {
-    var [selectedList, setSelectedList] = useState('');
-    var [map, setMap] = useState(null);
+    const [selectedList, setSelectedList] = useState('');
+    const [map, setMap] = useState(null);
     const [routeLayerId] = useState('route');
     const [routeSourceId] = useState('route-source');
-    var APIKEY = 'NhpffQFVsuEKicglGSJltG2aJr95GNgD';
-    var HOME = [27.577771, 47.153566];
-    var mapId = 'mymap';
-    var [markers, setMarkers] = useState([]);
+    const APIKEY = 'NhpffQFVsuEKicglGSJltG2aJr95GNgD';
+    const HOME = [27.577771, 47.153566];
+    const mapId = 'mymap';
+    const [markers, setMarkers] = useState([]);
+    const [details, setDetails] = useState({
+        title: '',
+        images: [],
+        texts: [],
+        altTableContent: [],
+        prices: ''
+    });
 
-    //zoom in zoom out
     useEffect(() => {
-        if (map) {
-            /*event listener pt zoom in */
-            document.getElementById('zoomInBtn').addEventListener('click', handleZoomIn);
-            /*event listener pt zoom out */
-            document.getElementById('zoomOutBtn').addEventListener('click', handleZoomOut);
-        }
-    }, [map]);
+        const script1 = document.createElement('script');
+        script1.src = 'https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.53.0/maps/maps-web.min.js';
+        script1.async = true;
+        document.body.appendChild(script1);
+
+        const script2 = document.createElement('script');
+        script2.src = 'https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.53.0/services/services-web.min.js';
+        script2.async = true;
+        document.body.appendChild(script2);
+
+        return () => {
+            document.body.removeChild(script1);
+            document.body.removeChild(script2);
+        };
+    }, []);
 
     useEffect(() => {
         if (window.tt && window.tt.map) {
@@ -100,74 +114,71 @@ function App() {
     };
 
     useEffect(() => {
-        const waypointsDropdown = document.getElementById('waypointsDropdown');
-        waypointsDropdown.addEventListener('change', handleDropdownChange);
+        if (map) {
+            document.getElementById('zoomInBtn').addEventListener('click', handleZoomIn);
+            document.getElementById('zoomOutBtn').addEventListener('click', handleZoomOut);
 
-        return () => {
-            waypointsDropdown.removeEventListener('change', handleDropdownChange);
-        };
-    }, []);
-
-    useEffect(() => {
-        const script1 = document.createElement('script');
-        script1.src = 'https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.53.0/maps/maps-web.min.js';
-        script1.async = true;
-        document.body.appendChild(script1);
-
-        const script2 = document.createElement('script');
-        script2.src = 'https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.53.0/services/services-web.min.js';
-        script2.async = true;
-        document.body.appendChild(script2);
-
-        return () => {
-            document.body.removeChild(script1);
-            document.body.removeChild(script2);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (window.tt && window.tt.map) {
-            const mapInstance = window.tt.map({
-                key: APIKEY,
-                container: mapId,
-                center: HOME,
-                zoom: 15,
-                style: 'tomtom://vector/1/basic-main',
-            });
-            setMap(mapInstance);
-            const iconElement = document.createElement('div');
-            const imgElement = document.createElement('img');
-            imgElement.src = houseIcon;
-            imgElement.style.width = '45px';
-            imgElement.style.height = '45px';
-            iconElement.appendChild(imgElement);
-            
-            const marker = new window.tt.Marker({ element: iconElement }).setLngLat(HOME).addTo(mapInstance);
+            return () => {
+                document.getElementById('zoomInBtn').removeEventListener('click', handleZoomIn);
+                document.getElementById('zoomOutBtn').removeEventListener('click', handleZoomOut);
+            };
         }
-    }, []);
+    }, [map]);
 
-    const createRoute = () => {
+    const fetchData = () => {
+        let listToSend = selectedList;
+        if (selectedList === 'waypoints1') {
+            listToSend = 'Shopping List 1';
+        }
+
+        fetch('http://localhost:8080/api/endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ selectedList: listToSend })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const waypoints = data.map(waypoint => ({ lnglat: [waypoint.lng, waypoint.lat] }));
+            waypoints.unshift({ lnglat: HOME });
+            waypoints.push({ lnglat: HOME });
+            createRoute(waypoints);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [selectedList]);
+
+    const createRoute = (waypoints) => {
         if (!map) {
             return;
         }
-        for (const marker of markers) {
-            marker.remove();
-        }
-        const selectedWaypoints = getSelectedWaypoints();
+        markers.forEach(marker => marker.remove());
+
         const routeOptions = {
             key: APIKEY,
-            locations: selectedWaypoints.map(waypoint => waypoint.lnglat),
+            locations: waypoints.map(waypoint => waypoint.lnglat),
             computeBestOrder: false,
             travelMode: 'car'
         };
 
-        const newMarkers = [];
-        selectedWaypoints.forEach(waypoint => {
-            if(waypoint.lnglat != HOME) {
-                const marker = new window.tt.Marker().setLngLat(waypoint.lnglat).addTo(map);
-                newMarkers.push(marker);
+        const newMarkers = waypoints.map(waypoint => {
+            if (!waypoint.lnglat.equals(HOME)) {
+                return new window.tt.Marker().setLngLat(waypoint.lnglat).addTo(map);
             }
-        });
+            return null;
+        }).filter(marker => marker !== null);
+
         setMarkers(newMarkers);
 
         if (map.getLayer(routeLayerId)) {
@@ -182,43 +193,6 @@ function App() {
             const geoJSON = routeData.toGeoJson();
             displayRoute(geoJSON);
         });
-    };
-    
-
-    const handleDropdownChange = (event) => {
-        setSelectedList(event.target.value);
-        for (const marker of markers) {
-            marker.remove();
-        }
-        createRoute();
-    };
-
-    const getSelectedWaypoints = () => {
-        const waypoints = {
-            waypoints1: [
-                { lnglat: HOME },
-                { lnglat: [27.5755972, 47.160983] },
-                { lnglat: [27.594869, 47.146127] },
-                { lnglat: [27.5956988, 47.145339] },
-                { lnglat: HOME },
-            ],
-            waypoints2: [
-                { lnglat: HOME },
-                { lnglat: [27.574795, 47.156094] },
-                { lnglat: [27.5731454, 47.1520637] },
-                { lnglat: [27.5889279, 47.1555179] },
-                { lnglat: HOME },
-            ],
-            waypoints3: [
-                { lnglat: HOME },
-                { lnglat: [27.573490, 47.150759] },
-                { lnglat: [27.5889279, 47.1555179] },
-                { lnglat: [27.594869, 47.146127] },
-                { lnglat: [27.595567, 47.144717] },
-                { lnglat: HOME },
-            ],
-        };
-        return waypoints[selectedList] || [];
     };
 
     const displayRoute = (geoJSON) => {
@@ -248,18 +222,13 @@ function App() {
         });
     };
 
-    const [details, setDetails] = useState({
-        title: '',
-        images: [],
-        texts: [],
-        altTableContent: [],
-        prices: ''
-    });
+    const handleDropdownChange = (event) => {
+        setSelectedList(event.target.value);
+    };
 
     const showDetails = (title, images, texts, altTableContent, prices) => {
         const modal = document.getElementById('detailsModal');
         modal.style.display = 'block';
-
         setDetails({
             title,
             images,
@@ -273,33 +242,6 @@ function App() {
         const modal = document.getElementById('detailsModal');
         modal.style.display = 'none';
     };
-    const fetchData = () => {
-        fetch('http://localhost:8080/api/endpoint', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ /* Data to be sent */ })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data); // Handle the response data here
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
-    };
-
-    // Call fetchData function when component mounts or whenever necessary
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     return (
         <div className="container">
             <NavBar />
