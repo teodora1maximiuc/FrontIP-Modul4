@@ -13,7 +13,7 @@ nav
 
 nav img
 {
-    margin-left: 100px;
+    margin-left: 20%;
 }
 
 ul
@@ -22,11 +22,16 @@ ul
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    justify-content: flex-end; /* Adjusted to align items to the right */
+    margin-right: 5%;
 }
 
 li:not(.reg-btn, .menu)
 {
     margin-top: 10px;
+    .reg-btn {
+        margin-right: 10px; /* Adjust the margin to create space */
+    }
 }
 
 .home>a
@@ -140,5 +145,15 @@ nav button
     li:not(.reg-btn, .dropdown)
     {
         display: none;
+    }
+    .reg-btn {
+        display: none;
+    }
+    .nav-img {
+        width: 40px;
+        margin-left: 10px !important
+    }
+    .dropdown .content {
+        right: 20px;
     }
 }

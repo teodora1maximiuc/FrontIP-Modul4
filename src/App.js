@@ -43,7 +43,6 @@ import pumpkinImage from './images/pumpkin.jpg';
 import peaImage from './images/pea.jpg';
 import broccoliImage from './images/broccoli.jpg';
 import riceImage from './images/rice.jpg';
-import ReactDOM from 'react-dom';
 
 const storeData = [
     {
@@ -229,7 +228,7 @@ function App() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ message: 'Hello from client'})
+                body: JSON.stringify({ message: selectedList})
             });
 
             if (!response.ok) {
@@ -237,7 +236,7 @@ function App() {
             }
 
             const responseData = await response.json();
-        
+            console.log(responseData);
             if (responseData.message) {
                 const coordinates = Object.values(responseData.message);
 

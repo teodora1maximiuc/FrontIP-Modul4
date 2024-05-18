@@ -5,7 +5,13 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-.container{
+@media only screen and (max-width: 768px) {
+  .generate-container select {
+    width: 100%; 
+  }
+}
+
+.container {
   width: 100%;
   min-height: 100vh;
   background: #fff;
@@ -82,10 +88,19 @@
   outline: none;
   transform: translateX(0%);
 }
+@media only screen and (max-width: 600px) {
+  .generate-container select {
+    width: 65%; 
+  }
+}
 
 .generate-container select option {
   background-color: #1BBC9B;
   color: white;
+  font-size: 12px;
+  width: auto; /* Adjust width to be automatic */
+  padding: 10px; /* Add padding to match button */
+  margin: 5px 0; 
 }
 
 .container .mymap {
@@ -94,6 +109,7 @@
   height: 90vh;
   margin: 10% auto 5% auto;
 }
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -134,7 +150,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   box-sizing: border-box; 
-  
+  border-radius: 10px;
 }
 
 .store-card {
@@ -143,9 +159,8 @@ body {
   margin: 0% 2%;
   width: 250px; /* Ajustează dimensiunea cardurilor pentru ecrane mici */
   margin-bottom: 20px;
-justify-content: left;
- 
-  
+  justify-content: left; 
+  border-radius: 10px;
 }
 .store-card-info{
   height: 150px;
@@ -190,17 +205,15 @@ justify-content: left;
 .store-card-img img{
   width: 100%;
   height: auto;
+  border-radius: 10px;
 }
 
 .details-button-container {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  text-align: center;
-  
-  
- /* margin-top: auto; /* Push the button to the bottom */
-}/* Stil pentru textul adițional */
+  align-items: center; /* Center the button vertically */
+  text-align: center; /* Align text inside the container */
+}
 
 .bottom-container {
   display: flex;
@@ -220,8 +233,9 @@ justify-content: left;
   cursor: pointer;
   font-size: 16px;
   display: flex;
-  align-items: flex-end;
-  /* Add any additional styling for the button */
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+  text-align: center; /* Align text inside the button */
 }
 
 /* Details button hover effect */
