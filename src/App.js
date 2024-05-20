@@ -4,130 +4,62 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Header from './header/Header/Header';
 import Footer from './footer/Footer/Footer';
+import LoadingIndicator from './LoadingIndicator';
+import { fetchImage } from './pexelsApi'; 
 
 import efficientRouteImage from './images/grocery_store.jpeg';
 import houseIcon from './images/house_icon.png';
 import icon from './images/icon.png';
 import AuchanImage from './images/auchan.jpg';
-import EggsImage from './images/eggs.jpg';
-import milkImage from './images/milk.jpg';
-import tomatoesImage from './images/tomatoes.jpg';
-import syrupImage from './images/syrup.jpg';
 import kauflandImage from './images/kaufland.jpg';
-import butterImage from './images/butter.jpg';
-import onionImage from './images/onion.jpg';
-import fishImage from './images/fish.jpg';
-import beefImage from './images/beef.jpg';
 import DedemanImage from './images/dedeman.jpg';
-import broomImage from './images/broom.jpg';
-import gloveImage from './images/glove.jpg';
-import glueImage from './images/glue.jpg';
 import LidlImage from './images/lidl.jpg';
-import cheeseImage from './images/cheese.jpg';
-import potatoImage from './images/potato.jpg';
-import carrotImage from './images/carrot.jpg';
-import yogurtImage from './images/yogurt.jpg';
 import PennyImage from './images/penny.jpg';
-import celeryImage from './images/celery.jpg';
-import cucumberImage from './images/cucumber.jpg';
-import breadImage from './images/bread.jpg';
-import lemonImage from './images/lemon.jpg';
 import MegaImage from './images/mega.jpg';
-import cherryImage from './images/cherry.jpg';
-import pastaImage from './images/pasta.jpg';
-import chickenImage from './images/chicken.jpg';
-import garlicImage from './images/garlic.jpg';
 import ProfiImage from './images/profi.jpg';
-import spinachImage from './images/spinach.jpg';
-import pumpkinImage from './images/pumpkin.jpg';
-import peaImage from './images/pea.jpg';
-import broccoliImage from './images/broccoli.jpg';
-import riceImage from './images/rice.jpg';
 
 const storeData = [
     {
         name: 'Auchan',
         imgSrc: AuchanImage,
         address: 'nr. 5C, Palas Mall, Strada Palas, Iași 700051',
-        price: '79.99 RON',
-        details: {
-            images: [EggsImage, milkImage, tomatoesImage, syrupImage],
-            texts: ['Eggs x2', 'Milk 2L', 'Tomatoes 1kg', 'Forest fruit syrup 1L'],
-            altTableContent: ['4.20 RON', '10.99 RON', '34.70 RON', '30.10 RON'],
-            prices: '79.99 RON'
-        }
+    
     },
     {
         name: 'Kaufland',
         imgSrc: kauflandImage,
         address: 'Iasi-Alexandru cel Bun',
-        price: '122.91 RON',
-        details: {
-            images: [butterImage, onionImage, fishImage, beefImage, riceImage],
-            texts: ['Butter x2', 'Onion x3', 'Fish 1kg', 'Beef 1kg', 'Rice 2kg'],
-            altTableContent: ['8.99 RON', '10.45 RON', '33.49 RON', '49.99 RON', '19.99 RON'],
-            prices: '122.91 RON'
-        }
+        
     },
     {
         name: 'Dedeman',
         imgSrc: DedemanImage,
         address: 'Bulevardul Primăverii nr. 2, Iași 700264',
-        price: '29.47 RON',
-        details: {
-            images: [broomImage, gloveImage, glueImage],
-            texts: ['Broom x1', 'Glove x1', 'Glue X1'],
-            altTableContent: ['14.99 RON', '9.49 RON', '4.99 RON'],
-            prices: '29.47 RON'
-        }
+        
     },
     {
         name: 'Lidl',
         imgSrc: LidlImage,
         address: 'Strada Pantelimon Halipa 3C, Iași 700612',
-        price: '153.92 RON',
-        details: {
-            images: [cheeseImage, potatoImage, carrotImage, yogurtImage],
-            texts: ['Cheese 1kg', 'Potato 2kg', 'Carrot 2kg', 'Yogurt 1kg'],
-            altTableContent: ['29.99 RON', '59.99 RON', '39.49 RON', '24.45 RON'],
-            prices: '153.92 RON'
-        }
+        
     },
     {
         name: 'Penny',
         imgSrc: PennyImage,
         address: 'Strada Pantelimon Halipa 12A, Iași 700614',
-        price: '63.26 RON',
-        details: {
-            images: [celeryImage, cucumberImage, breadImage, lemonImage],
-            texts: ['Celery 1kg', 'Cucumber x3', 'Bread x1', 'Lemon 1kg'],
-            altTableContent: ['23.99 RON', '14.49 RON', '7.49 RON', '17.29 RON'],
-            prices: '63.26 RON'
-        }
+       
     },
     {
         name: 'Mega',
         imgSrc: MegaImage,
         address: 'Strada Cerna 1, Iași',
-        price: '254.78 RON',
-        details: {
-            images: [cherryImage, pastaImage, chickenImage, garlicImage],
-            texts: ['Cherry 2kg', 'Pasta 1kg', 'Chicken 3kg', 'Garlic x5'],
-            altTableContent: ['79.99 RON', '22.31 RON', '119.99 RON', '32.49 RON'],
-            prices: '254.78 RON'
-        }
+        
     },
     {
         name: 'Profi',
         imgSrc: ProfiImage,
         address: 'Bulevardul Nicolae Iorga nr. 236, Iași 700721',
-        price: '178.46 RON',
-        details: {
-            images: [spinachImage, pumpkinImage, peaImage, broccoliImage],
-            texts: ['Spinach 1kg', 'Pumpkin x2', 'Pea 1kg', 'Broccoli 1kg'],
-            altTableContent: ['49.99 RON', '65.49 RON', '35.99 RON', '26.99 RON'],
-            prices: '178.46 RON'
-        }
+        
     },
 
 ];
@@ -150,6 +82,7 @@ function App() {
     });
     const storeNames = []; 
     const [stores, setStores] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         setStores([]);
     }, []);
@@ -218,7 +151,7 @@ function App() {
         }
     }, [map]);
 
-    const fetchData = async () => {
+    /*const fetchData = async () => {
         if (selectedList === '') {
             return;
         }
@@ -238,14 +171,15 @@ function App() {
             const responseData = await response.json();
             console.log(responseData);
             if (responseData.message) {
-                const coordinates = Object.values(responseData.message);
-
+                const storeNames = Object.keys(responseData.message);
+                const coordinates = storeNames.map(storeName => responseData.message[storeName].coordinates);
+    
                 const waypoints = coordinates.map(coordinate => ({ lnglat: coordinate }));
                 waypoints.unshift({ lnglat: HOME });
                 waypoints.push({ lnglat: HOME });
-
-                let storeNames = Object.keys(responseData.message);
+    
                 const filteredStoreData = storeData.filter(store => storeNames.includes(store.name));
+                filteredStoreData.sort((a, b) => storeNames.indexOf(a.name) - storeNames.indexOf(b.name));
                 setStores(filteredStoreData);
     
                 createRoute(waypoints);
@@ -254,6 +188,72 @@ function App() {
             }
         } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
+        }
+    };*/ // metoda veche 
+
+    const fetchData = async () => {
+        if (selectedList === '') {
+            return;
+        }
+        try {
+            const response = await fetch('http://localhost:8080/api/endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: selectedList })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            console.log(responseData);
+            if (responseData.message) {
+                const storeNames = Object.keys(responseData.message).filter(name => name !== 'TOTAL');
+                const coordinates = storeNames.map(storeName => responseData.message[storeName].coordinates);
+
+                const waypoints = coordinates.map(coordinate => ({ lnglat: coordinate }));
+                waypoints.unshift({ lnglat: HOME });
+                waypoints.push({ lnglat: HOME });
+
+                const filteredStoreData = await Promise.all(storeNames.map(async (storeName) => {
+                    const store = storeData.find(store => store.name === storeName);
+                    if (store) {
+                        const products = responseData.message[storeName].products;
+                        const totalPrice = responseData.message[storeName].totalPrice;
+                        const productDetails = await Promise.all(products.map(async (product) => {
+                            const imageUrl = await fetchImage(product.name);
+                            return {
+                                ...product,
+                                imageUrl
+                            };
+                        }));
+                        return {
+                            ...store,
+                            price: `${totalPrice} RON`,
+                            details: {
+                                ...store.details,
+                                images: productDetails.map(product => product.imageUrl),
+                                texts: productDetails.map(product => product.name),
+                                altTableContent: productDetails.map(product => `${product.price} RON`)
+                            }
+                        };
+                    }
+                    return null;
+                }));
+
+                filteredStoreData.sort((a, b) => storeNames.indexOf(a.name) - storeNames.indexOf(b.name));
+                setStores(filteredStoreData.filter(store => store !== null));
+                createRoute(waypoints);
+            } else {
+                console.error('Message data is null or undefined');
+            }
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -294,6 +294,8 @@ function App() {
         window.tt.services.calculateRoute(routeOptions).go().then(routeData => {
             const geoJSON = routeData.toGeoJson();
             displayRoute(geoJSON);
+        }).finally(() => {
+            setLoading(false);
         });
     };
     
@@ -371,9 +373,10 @@ function App() {
             </div>
             <div className="mymap" id={mapId}>
                 <div className="map-controls">
-                <button id="zoomInBtn"><FontAwesomeIcon icon={faPlus} /></button>
-                <button id="zoomOutBtn"><FontAwesomeIcon icon={faMinus} /></button>
-            </div>
+                    <button id="zoomInBtn"><FontAwesomeIcon icon={faPlus} /></button>
+                    <button id="zoomOutBtn"><FontAwesomeIcon icon={faMinus} /></button>
+                </div>
+                {loading && <LoadingIndicator />} {/* Show loading indicator */}
             </div>
             <div className='titlu'>
                 <h2> Store route order:  </h2>
@@ -413,8 +416,8 @@ function App() {
                     <div id="imageGallery" className="image-gallery">
                         {details.images.map((imageSrc, index) => (
                             <div key={index}>
-                                <img src={imageSrc} alt={details.title} />
-                                <p>{details.texts[index]}</p>
+                                {imageSrc ? <img src={imageSrc} alt={details.texts[index]} /> : <p>No image available</p>}
+                                <p><strong><u>{details.texts[index]}</u></strong></p>
                                 <p>Price: {details.altTableContent[index]}</p>
                             </div>
                         ))}
