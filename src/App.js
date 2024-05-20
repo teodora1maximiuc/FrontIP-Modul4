@@ -238,13 +238,13 @@ function App() {
             const responseData = await response.json();
             console.log(responseData);
             if (responseData.message) {
-                const coordinates = Object.values(responseData.message);
-
+                const storeNames = Object.keys(responseData.message);
+                const coordinates = storeNames.map(storeName => responseData.message[storeName].coordinates);
+    
                 const waypoints = coordinates.map(coordinate => ({ lnglat: coordinate }));
                 waypoints.unshift({ lnglat: HOME });
                 waypoints.push({ lnglat: HOME });
-
-                let storeNames = Object.keys(responseData.message);
+    
                 const filteredStoreData = storeData.filter(store => storeNames.includes(store.name));
                 setStores(filteredStoreData);
     
