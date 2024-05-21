@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -23,45 +23,37 @@ const storeData = [
         name: 'Auchan',
         imgSrc: AuchanImage,
         address: 'nr. 5C, Palas Mall, Strada Palas, Iași 700051',
-    
     },
     {
         name: 'Kaufland',
         imgSrc: kauflandImage,
         address: 'Iasi-Alexandru cel Bun',
-        
     },
     {
         name: 'Dedeman',
         imgSrc: DedemanImage,
         address: 'Bulevardul Primăverii nr. 2, Iași 700264',
-        
     },
     {
         name: 'Lidl',
         imgSrc: LidlImage,
         address: 'Strada Pantelimon Halipa 3C, Iași 700612',
-        
     },
     {
         name: 'Penny',
         imgSrc: PennyImage,
         address: 'Strada Pantelimon Halipa 12A, Iași 700614',
-       
     },
     {
         name: 'Mega',
         imgSrc: MegaImage,
         address: 'Strada Cerna 1, Iași',
-        
     },
     {
         name: 'Profi',
         imgSrc: ProfiImage,
         address: 'Bulevardul Nicolae Iorga nr. 236, Iași 700721',
-        
     },
-
 ];
 
 function App() {
@@ -70,7 +62,7 @@ function App() {
     const [routeLayerId] = useState('route');
     const [routeSourceId] = useState('route-source');
     const APIKEY = 'NhpffQFVsuEKicglGSJltG2aJr95GNgD';
-    const HOME = [27.577771, 47.153566];
+    const HOME = useMemo(() => [27.577771, 47.153566], []);
     const mapId = 'mymap';
     const [markers, setMarkers] = useState([]);
     const [details, setDetails] = useState({
@@ -80,9 +72,9 @@ function App() {
         altTableContent: [],
         prices: ''
     });
-    const storeNames = []; 
     const [stores, setStores] = useState([]);
     const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         setStores([]);
     }, []);
@@ -121,9 +113,9 @@ function App() {
             imgElement.style.height = '45px';
             iconElement.appendChild(imgElement);
 
-            const marker = new window.tt.Marker({ element: iconElement }).setLngLat(HOME).addTo(mapInstance);
+            new window.tt.Marker({ element: iconElement }).setLngLat(HOME).addTo(mapInstance);
         }
-    }, []);
+    }, [APIKEY, HOME, mapId]);
 
     const handleZoomIn = () => {
         if (map) {
@@ -149,47 +141,7 @@ function App() {
                 document.getElementById('zoomOutBtn').removeEventListener('click', handleZoomOut);
             };
         }
-    }, [map]);
-
-    /*const fetchData = async () => {
-        if (selectedList === '') {
-            return;
-        }
-        try {
-            const response = await fetch('http://localhost:8080/api/endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: selectedList})
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const responseData = await response.json();
-            console.log(responseData);
-            if (responseData.message) {
-                const storeNames = Object.keys(responseData.message);
-                const coordinates = storeNames.map(storeName => responseData.message[storeName].coordinates);
-    
-                const waypoints = coordinates.map(coordinate => ({ lnglat: coordinate }));
-                waypoints.unshift({ lnglat: HOME });
-                waypoints.push({ lnglat: HOME });
-    
-                const filteredStoreData = storeData.filter(store => storeNames.includes(store.name));
-                filteredStoreData.sort((a, b) => storeNames.indexOf(a.name) - storeNames.indexOf(b.name));
-                setStores(filteredStoreData);
-    
-                createRoute(waypoints);
-            } else {
-                console.error('Message data is null or undefined');
-            }
-        } catch (error) {
-            console.error('There has been a problem with your fetch operation:', error);
-        }
-    };*/ // metoda veche 
+    }, [map, handleZoomIn, handleZoomOut]);
 
     const fetchData = async () => {
         if (selectedList === '') {
@@ -298,7 +250,6 @@ function App() {
             setLoading(false);
         });
     };
-    
 
     const displayRoute = (geoJSON) => {
         if (!map) return;
@@ -347,6 +298,7 @@ function App() {
         const modal = document.getElementById('detailsModal');
         modal.style.display = 'none';
     };
+
     return (
         <div className="container">
             <div className="Header">
@@ -386,11 +338,11 @@ function App() {
                 {stores.map(store => (
                     <div className="store-card" key={store.name}>
                         <div className='store-card-img'> 
-                            <img src={store.imgSrc} alt={'${store.name} Store'} /> 
+                            <img src={store.imgSrc} alt={`${store.name} Store`} /> 
                         </div>
                         <div className="store-card-info">
                             <h2>{store.name}</h2>
-                            <div className='locatie'><img src={icon}/></div>
+                            <div className='locatie'><img src={icon} alt="Location Icon" /></div>
                             <p className='p1'>{store.address}</p>
                             <hr></hr>
                             <p className='price'>Price: <b>{store.price}</b></p>
