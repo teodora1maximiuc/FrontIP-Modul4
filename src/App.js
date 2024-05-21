@@ -18,6 +18,8 @@ import PennyImage from './images/penny.jpg';
 import MegaImage from './images/mega.jpg';
 import ProfiImage from './images/profi.jpg';
 
+
+
 const storeData = [
     {
         name: 'Auchan',
@@ -142,11 +144,13 @@ function App() {
             };
         }
     }, [map, handleZoomIn, handleZoomOut]);
-
+    
+    
     const fetchData = async () => {
         if (selectedList === '') {
             return;
         }
+        setLoading(true);
         try {
             const response = await fetch('http://localhost:8080/api/endpoint', {
                 method: 'POST',
@@ -280,6 +284,7 @@ function App() {
 
     const handleDropdownChange = (event) => {
         setSelectedList(event.target.value);
+        setLoading(true); // Set loading to true
     };
 
     const showDetails = (title, images, texts, altTableContent, prices) => {

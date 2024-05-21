@@ -323,6 +323,19 @@ cursor: pointer;
   z-index: 1;
   
 }
+.loading-indicator {
+  position: absolute; /* Position it absolutely */
+  top: 0; /* Position it at the top */
+  left: 0; /* Position it at the left */
+  width: 100%; /* Make it occupy the full width of the page */
+  height: 100%; /* Make it occupy the full height of the page */
+  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+  z-index: 1000; /* Set a high z-index to appear over other elements */
+  display: flex; /* Center the loading indicator content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
 
 .map-controls button {
   background-color: #1BBC9B;
