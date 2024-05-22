@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 @media only screen and (max-width: 768px) {
   .generate-container select {
-    width: 100%; 
+    width: 100%;
   }
 }
 
@@ -31,7 +32,6 @@
   height: 300px;
 }
 
-
 .title {
   position: absolute;
   top: 25%;
@@ -50,10 +50,11 @@
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
 }
+
 .generate-container {
   background-color: #F2F2F2;
   border-radius: 5px;
-  margin: -150px auto;
+  margin: -150px auto 20px auto; /* Negative margin to overlap the title image */
   padding: 20px;
   max-width: 800px;
   z-index: 100;
@@ -77,10 +78,10 @@
 
 .generate-container select {
   width: 30%;
-  padding: 10px; 
+  padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #1BBC9B; 
+  background-color: #1BBC9B;
   color: white;
   font-size: 16px;
   text-align: center;
@@ -88,9 +89,10 @@
   outline: none;
   transform: translateX(0%);
 }
+
 @media only screen and (max-width: 600px) {
   .generate-container select {
-    width: 65%; 
+    width: 65%;
   }
 }
 
@@ -98,16 +100,25 @@
   background-color: #1BBC9B;
   color: white;
   font-size: 12px;
-  width: auto; /* Adjust width to be automatic */
-  padding: 10px; /* Add padding to match button */
-  margin: 5px 0; 
+  width: auto;
+  padding: 10px;
+  margin: 5px 0;
 }
 
 .container .mymap {
-  margin-top: 100px;
-  width: 80%; 
+  width: 80%;
   height: 90vh;
-  margin: 10% auto 5% auto;
+  margin: 20px auto 0 auto; /* Added top margin for spacing */
+  padding-top: 150px; /* Add padding-top to offset the negative margin */
+  z-index: 100;
+  position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+  .mymap {
+    width: 90%;
+    margin: 50px auto 0 auto; /* Ensure enough space for smaller screens */
+  }
 }
 
 body {
@@ -117,39 +128,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 .back-button {
   width: auto;
-  background-color: #007bff; /* Culoare de fundal albastru */
-  color: #fff; /* Culoare text alb */
-  padding: 8px 16px; /* Spatiere interioara */
-  border: none; /* Fara contur */
-  border-radius: 4px; /* Rotunjire margini */
-  cursor: pointer; /* Pointer la hover */
-  font-size: 16px; /* Dimensiune font */
-  margin-top: 99px; /* Spațiul de sus */
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 99px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .back-bottom-container {
   display: flex;
-  justify-content: center; /* Aliniază orizontal elementele în centru */
-  align-items: center; /* Aliniază vertical elementele în centru */
-  margin-top: 20px; /* Spațiul de sus */
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
-/* Stil pentru butonul "Go back" la hover */
+
 .back-button:hover {
-  background-color: #0056b3; /* Culoare de fundal albastru mai inchis */
+  background-color: #0056b3;
 }
 
 .store-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   border-radius: 10px;
 }
 
@@ -157,52 +166,53 @@ body {
   border: 1px solid #ccc;
   padding: 16px 16px;
   margin: 0% 2%;
-  width: 250px; /* Ajustează dimensiunea cardurilor pentru ecrane mici */
+  width: 250px;
   margin-bottom: 20px;
-  justify-content: left; 
+  justify-content: left;
   border-radius: 10px;
 }
-.store-card-info{
+
+.store-card-info {
   height: 150px;
   justify-content: center;
-  
 }
-.locatie{
+
+.locatie {
   height: 15px;
   width: 15px;
   float: left;
-
 }
-.p1{
+
+.p1 {
   margin-left: 20px;
 }
-.locatie img{
+
+.locatie img {
   height: auto;
   width: 100%;
-
-  
 }
-.price{
+
+.price {
   padding-top: 3%;
 }
 
-
-.img-card{
+.img-card {
   background-size: cover;
   background-repeat: no-repeat;
   padding: 10px 10px;
   width: 100%;
 }
+
 .store-card-img {
   text-align: center;
   display: flex;
   justify-content: center;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   height: 120px;
   width: auto;
-  
 }
-.store-card-img img{
+
+.store-card-img img {
   width: 100%;
   height: auto;
   border-radius: 10px;
@@ -211,19 +221,17 @@ body {
 .details-button-container {
   display: flex;
   justify-content: center;
-  align-items: center; /* Center the button vertically */
-  text-align: center; /* Align text inside the container */
+  align-items: center;
+  text-align: center;
 }
 
 .bottom-container {
   display: flex;
-  margin-left: 10px; /* Spațiul între buton și text */
+  margin-left: 10px;
   align-items: center;
   justify-content: center;
 }
 
-
-/* Details button */
 .details-button {
   background-color: #007bff;
   color: #fff;
@@ -233,87 +241,84 @@ body {
   cursor: pointer;
   font-size: 16px;
   display: flex;
-  align-items: center; /* Center the text vertically */
-  justify-content: center; /* Center the text horizontally */
-  text-align: center; /* Align text inside the button */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-/* Details button hover effect */
 .details-button:hover {
   background-color: #0056b3;
-  /* Add any additional hover styling */
 }
 
 .modal {
-display: none;
-position: fixed;
-z-index: 1;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0,0,0,0.4);
-z-index: 101;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 101;
 }
 
 .modal-content {
-background-color: #fefefe;
-margin: 15% auto;
-padding: 20px;
-border: 1px solid #888;
-width: 80%;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
 }
-.titlu{
+
+.titlu {
   text-align: center;
   padding-bottom: 25px;
   text-decoration: underline;
 }
+
 .close {
-color: #aaa;
-float: right;
-font-size: 28px;
-font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-color: black;
-text-decoration: none;
-cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
+
 .image-gallery {
   display: flex;
- flex-wrap: wrap;
- align-items: center;
- justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
-.image-gallery p{
+
+.image-gallery p {
   margin-left: 20px;
-
 }
-
 
 .image-gallery img {
-  width: 250px; /* Asigură că imaginea ocupă întreaga lățime a containerului */
-  height: 250px; /* Permite imaginii să-și mențină proporțiile */
-  max-height: 250px; /* Limitează înălțimea maximă a imaginii pentru a se încadra în spațiul dedicat */
-  object-fit: cover; /* Ajustează modul în care imaginea este poziționată în container */
+  width: 250px;
+  height: 250px;
+  max-height: 250px;
+  object-fit: cover;
   border-radius: 30px;
   display: flex;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   margin: 10px 10px;
-  
 }
 
-
-
 .text-gallery p {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .details-button-container {
-  text-align: center; /* Aliniere butoane în centru */
+  text-align: center;
 }
 
 .map-controls {
@@ -321,21 +326,20 @@ cursor: pointer;
   top: 20px;
   right: 20px;
   z-index: 1;
-  
-}
-.loading-indicator {
-  position: absolute; /* Position it absolutely */
-  top: 0; /* Position it at the top */
-  left: 0; /* Position it at the left */
-  width: 100%; /* Make it occupy the full width of the page */
-  height: 100%; /* Make it occupy the full height of the page */
-  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
-  z-index: 1000; /* Set a high z-index to appear over other elements */
-  display: flex; /* Center the loading indicator content */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
 }
 
+.loading-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .map-controls button {
   background-color: #1BBC9B;
@@ -346,7 +350,6 @@ cursor: pointer;
   margin-bottom: 5px;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-
 }
 
 .map-controls button:hover {
