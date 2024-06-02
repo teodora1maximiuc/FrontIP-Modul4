@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -17,14 +17,13 @@ import LidlImage from './images/lidl.jpg';
 import PennyImage from './images/penny.jpg';
 import MegaImage from './images/mega.jpg';
 import ProfiImage from './images/profi.jpg';
-
-
+import {Shopping} from './Shopping';
 
 const storeData = [
     {
         name: 'Auchan',
         imgSrc: AuchanImage,
-        address: 'nr. 5C, Palas Mall, Strada Palas, Iași 700051',
+        address: 'nr. 5C, Palas Mall, Strada Palas, IaÈ™i 700051',
     },
     {
         name: 'Kaufland',
@@ -34,37 +33,37 @@ const storeData = [
     {
         name: 'Dedeman',
         imgSrc: DedemanImage,
-        address: 'Bulevardul Primăverii nr. 2, Iași 700264',
+        address: 'Bulevardul PrimÄƒverii nr. 2, IaÈ™i 700264',
     },
     {
         name: 'Lidl',
         imgSrc: LidlImage,
-        address: 'Strada Pantelimon Halipa 3C, Iași 700612',
+        address: 'Strada Pantelimon Halipa 3C, IaÈ™i 700612',
     },
     {
         name: 'Penny',
         imgSrc: PennyImage,
-        address: 'Strada Pantelimon Halipa 12A, Iași 700614',
+        address: 'Strada Pantelimon Halipa 12A, IaÈ™i 700614',
     },
     {
         name: 'Mega',
         imgSrc: MegaImage,
-        address: 'Strada Cerna 1, Iași',
+        address: 'Strada Cerna 1, IaÈ™i',
     },
     {
         name: 'Profi',
         imgSrc: ProfiImage,
-        address: 'Bulevardul Nicolae Iorga nr. 236, Iași 700721',
+        address: 'Bulevardul Nicolae Iorga nr. 236, IaÈ™i 700721',
     },
 ];
 
-function App() {
+export const Home = () => {
+    const prevDataRef = useRef(null);
     const [selectedList, setSelectedList] = useState('');
     const [map, setMap] = useState(null);
     const [routeLayerId] = useState('route');
     const [routeSourceId] = useState('route-source');
-    const APIKEY = 'NhpffQFVsuEKicglGSJltG2aJr95GNgD';
-    const HOME = useMemo(() => [27.577771, 47.153566], []);
+    const [APIKEY] = useState('NhpffQFVsuEKicglGSJltG2aJr95GNgD');
     const mapId = 'mymap';
     const [markers, setMarkers] = useState([]);
     const [details, setDetails] = useState({
@@ -77,9 +76,45 @@ function App() {
     const [stores, setStores] = useState([]);
     const [loading, setLoading] = useState(false);
 
+   
     useEffect(() => {
         setStores([]);
     }, []);
+    
+    const [House, setHouse] = useState([27.577771, 47.153566]);
+
+    useEffect(() => {
+        const fetchInitialLocation = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/api/updateLocation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        latitude: House[0],
+                        longitude: House[1]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const locationData = await response.json();
+                console.log("Initial location:", locationData);
+
+                setHouse([locationData.latitude, locationData.longitude]);
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+            }
+        };
+
+        fetchInitialLocation(); 
+
+       
+    }, []);
+
 
     useEffect(() => {
         const script1 = document.createElement('script');
@@ -103,7 +138,7 @@ function App() {
             const mapInstance = window.tt.map({
                 key: APIKEY,
                 container: mapId,
-                center: HOME,
+                center: House,
                 zoom: 15,
                 style: 'tomtom://vector/1/basic-main',
             });
@@ -115,9 +150,9 @@ function App() {
             imgElement.style.height = '45px';
             iconElement.appendChild(imgElement);
 
-            new window.tt.Marker({ element: iconElement }).setLngLat(HOME).addTo(mapInstance);
+            new window.tt.Marker({ element: iconElement }).setLngLat(House).addTo(mapInstance);
         }
-    }, [APIKEY, HOME, mapId]);
+    }, [APIKEY, House, mapId]);
 
     const handleZoomIn = () => {
         if (map) {
@@ -134,16 +169,19 @@ function App() {
     };
 
     useEffect(() => {
-        if (map) {
-            document.getElementById('zoomInBtn').addEventListener('click', handleZoomIn);
-            document.getElementById('zoomOutBtn').addEventListener('click', handleZoomOut);
-
+        const zoomInBtn = document.getElementById('zoomInBtn');
+        const zoomOutBtn = document.getElementById('zoomOutBtn');
+    
+        if (zoomInBtn && zoomOutBtn) {
+            zoomInBtn.addEventListener('click', handleZoomIn);
+            zoomOutBtn.addEventListener('click', handleZoomOut);
+    
             return () => {
-                document.getElementById('zoomInBtn').removeEventListener('click', handleZoomIn);
-                document.getElementById('zoomOutBtn').removeEventListener('click', handleZoomOut);
+                zoomInBtn.removeEventListener('click', handleZoomIn);
+                zoomOutBtn.removeEventListener('click', handleZoomOut);
             };
         }
-    }, [map, handleZoomIn, handleZoomOut]);
+    }, [map]);
     
     
     const fetchData = async () => {
@@ -171,8 +209,8 @@ function App() {
                 const coordinates = storeNames.map(storeName => responseData.message[storeName].coordinates);
 
                 const waypoints = coordinates.map(coordinate => ({ lnglat: coordinate }));
-                waypoints.unshift({ lnglat: HOME });
-                waypoints.push({ lnglat: HOME });
+                waypoints.unshift({ lnglat: House });
+                waypoints.push({ lnglat: House });
 
                 const filteredStoreData = await Promise.all(storeNames.map(async (storeName) => {
                     const store = storeData.find(store => store.name === storeName);
@@ -217,6 +255,79 @@ function App() {
         fetchData();
     }, [selectedList]);
 
+    function isEqual(objA, objB) {
+        if (objA === objB) return true;
+        if (objA == null || objB == null) return false;
+        if (typeof objA !== 'object' || typeof objB !== 'object') return false;
+        const keysA = Object.keys(objA);
+        const keysB = Object.keys(objB);
+        if (keysA.length !== keysB.length) return false;
+
+        for (let key of keysA) {
+            if (!isEqual(objA[key], objB[key])) return false;
+        }
+        return true;
+    }
+    /*ver noua netestata fara request */
+    const fetchData_consumption = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/inventory/infoItemRestock', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(58)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            console.log(responseData);
+            console.log('prevData:');
+            console.log(prevDataRef.current);
+            if (!isEqual(responseData, prevDataRef.current)) {
+                prevDataRef.current = responseData;
+                console.log('Data changed!');
+                console.log(prevDataRef.current);
+                const productId = Object.keys(responseData)[0];
+                const productName = responseData[productId];
+                console.log(productName);
+                console.log(productId);
+                Notification.requestPermission().then(perm => {
+                    if (perm === 'granted') {
+                        const notification = new Notification('Sugestie de restock!', {
+                            body: `Produsul ${productName} trebuie cumparat in urmatoarele zile!`
+                        })
+                        notification.onclick = (event) => {
+                            event.preventDefault(); 
+                            
+                            const targetUrl = `http://localhost:3000/ShoppingList?fromNotification=true&productId=${productId}&productName=${encodeURIComponent(productName)}`;
+                            if (!window.location || window.location.href === 'http://localhost:3000/') {
+                                window.location.href = targetUrl;
+                            } else {
+                                window.open(targetUrl, '_blank');
+                            }
+                        };
+                    }
+                });
+            }
+
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        const interval = setInterval(() => {
+            fetchData_consumption();
+        }, 10000); // 60000 ms = 1 minut
+
+        return () => clearInterval(interval);
+    }, []);
+
     const createRoute = (waypoints) => {
         if (!map) {
             return;
@@ -231,7 +342,7 @@ function App() {
         };
     
         const newMarkers = waypoints.map(waypoint => {
-            if (waypoint.lnglat[0] !== HOME[0] && waypoint.lnglat[1] !== HOME[1]) {
+            if (waypoint.lnglat[0] !== House[0] && waypoint.lnglat[1] !== House[1]) {
                 return new window.tt.Marker().setLngLat(waypoint.lnglat).addTo(map);
             }
             return null;
@@ -303,12 +414,14 @@ function App() {
         const modal = document.getElementById('detailsModal');
         modal.style.display = 'none';
     };
-
     return (
+        <>
         <div className="container">
             <div className="Header">
                 <Header />
             </div>
+           
+             
             <div className="title-container">
                 <img src={efficientRouteImage} alt="Efficient Route" className="title-image" />
                 <div className="title"><b>Efficient Route</b></div>
@@ -384,11 +497,18 @@ function App() {
                     </div>
                 </div>
             </div>
+            <div className="ButonAvg">
+                <button>Restock Suggestions</button>
+            </div>
+            
             <div className="Footer">
                 <Footer />
             </div>
+            
         </div>
+       
+        </>
     );
 }
 
-export default App;
+export default Home;
