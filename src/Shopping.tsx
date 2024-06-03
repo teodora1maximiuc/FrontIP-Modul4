@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import './Shopping.css';
 const Shopping: React.FC = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [productId, setProductId] = useState<string | null>('');
